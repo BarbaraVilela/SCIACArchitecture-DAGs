@@ -16,7 +16,7 @@ default_args = {
 # Nomeando a DAG e definindo quando ela vai ser executada (você pode usar argumentos em Crontab também caso queira que a DAG execute por exemplo todos os dias as 8 da manhã) 
 
 with DAG(
-   'my-first-dag',
+   'my-first-dag-Alterada',
    schedule_interval=timedelta(minutes=1),
    catchup=False,
    default_args=default_args
