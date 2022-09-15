@@ -16,7 +16,7 @@ default_args = {
 # Nomeando a DAG e definindo quando ela vai ser executada (você pode usar argumentos em Crontab também caso queira que a DAG execute por exemplo todos os dias as 8 da manhã) 
 
 with DAG(
-   'my-first-dag-Alterada',
+   'carga_centro_de_custos',
    schedule_interval=timedelta(minutes=1),
    catchup=False,
    default_args=default_args
@@ -32,10 +32,10 @@ with DAG(
       """)
 
    t2 = BashOperator(
-      task_id='second_etl',
+      task_id='busca_centros_de_custos',
       bash_command="""
       cd $AIRFLOW_HOME/dags/etl_scripts/
-      python3 my_second_etl_script.py
+      python3 busca_centros_de_custos.py
       """)
 
    # Definindo o padrão de execução, nesse caso executamos t1 e depois t2
