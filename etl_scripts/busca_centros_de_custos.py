@@ -1,17 +1,18 @@
+# Importando as Bibliotecas necessárias
 import requests
 import json
 
-# Acessa a API do Sistema da Estrutura Organizacional do Município
-print("Faz a requisição GET no serviço web do Sistema da Estrutura Organizacional do Município")
+# Acessando a API do Sistema da Estrutura Organizacional do Município
+print("Fazendo a requisição GET no serviço web do Sistema da Estrutura Organizacional do Município...")
 request = requests.get("https://sciac-api-fake.azurewebsites.net/")
 json_data = json.loads(request.content)
 
-print("Grava os dados em um arquivo temporário, a ser consumido pela próxima tarefa")
-# Abre/cria o arquivo e limpa seu conteúdo, caso haja
+print("Gravando os dados em um arquivo temporário, a ser consumido pela próxima tarefa...")
+# Abrindo/criando o arquivo e limpando seu conteúdo, caso haja
 temp_file = open("centros_de_custos_temp.txt","r+") 
 temp_file.truncate(0)
 
-# Grava os dados obtidos e fecha o arquivo
+# Gravando os dados obtidos e fechando o arquivo
 temp_file.writelines (json.dumps(json_data))
 temp_file.close()
 
