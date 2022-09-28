@@ -6,5 +6,8 @@ O repositório SIACArchitecture-DAGs é um módulo da arquitetura, que constitui
 
  # Como usar?
 Para rodar o código aqui armazenado, é necessário rodar o Apache Airflow e clonar o repositório na pasta padrão da ferramenta, de modo que as DAGs possam ser identificadas por ela e, então, executadas.
-
 Em um contexto real, a construção de uma imagem Docker tendo como base uma imagem já com o Airflow instalada, e o conteúdo desse repositório em sua pasta padrão pode ser uma boa alternativa para tornar ágil o processo de deploy.
+Para a construção do protótipo, foi utilizada como base a imagem 'puckel/docker-airflow', disponível em https://github.com/puckel/docker-airflow
+
+ # Credenciais de acesso
+As credenciais de acesso necessárias para testar a aplicação encontra-se no arquivo 'secret.txt'
