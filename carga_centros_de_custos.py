@@ -2,12 +2,15 @@
 from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.bash_operator import BashOperator
+from airflow.operators.email_operator import EmailOperator
 
 # Definindo alguns argumentos básicos
 default_args = {
    'owner': 'Bárbara Vilela',
    'depends_on_past': False,
    'start_date': datetime(2022, 1, 1),
+   'email': ['pucprojeto_sciac@gmail.com'],
+   'email_on_failure': ['pucprojeto_sciac@gmail.com'],
    'retries': 0,
    }
    
@@ -28,12 +31,11 @@ with DAG(
       python3 busca_centros_de_custos.py
       """)
 
-   t2 = BashOperator(
-      task_id='first_etl',
-      bash_command="""
-      cd $AIRFLOW_HOME/dags/etl_scripts/
-      python3 my_first_etl_script.py
-      """)
+   t2 = EmailOperator(
+    task_id='send_email',
+    to='pucprojeto.sciac@hotmail.com',
+    subject='Carga completa',
+    html_content="Date: {{ ds }}")
 
    # Definindo o padrão de execução
    t1 >> t2
