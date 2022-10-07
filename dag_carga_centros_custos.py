@@ -9,14 +9,14 @@ default_args = {
    'owner': 'Bárbara Vilela',
    'depends_on_past': False,
    'start_date': datetime(2022, 1, 1),
-   'email': ['pucprojeto_sciac@gmail.com'],
-   'email_on_failure': ['pucprojeto_sciac@gmail.com'],
+   'email': ['pucprojeto.sciac@hotmail.com'],
+   'email_on_failure': ['pucprojeto.sciac@hotmail.com'],
    'retries': 0,
    }
    
 # Nomeando a DAG e definindo quando será executada
 with DAG(
-   'carga_centros_de_custos',
+   'dag_carga_centros_de_custos',
    schedule_interval=timedelta(minutes=1),
    catchup=False,
    default_args=default_args
@@ -25,10 +25,10 @@ with DAG(
    # Definindo as tarefas a serem executadas
 
    t1 = BashOperator(
-      task_id='busca_centros_de_custos',
+      task_id='teste',
       bash_command="""
-      cd $AIRFLOW_HOME/dags/etl_scripts/
-      python3 busca_centros_de_custos.py
+      cd $AIRFLOW_HOME/dags/etlScripts/centrosDeCustos/
+      python3 busca_centros_custos.py
       """)
 
    t2 = EmailOperator(

@@ -1,1 +1,0 @@
-print(“Executed code from my second Python ETL!”)
