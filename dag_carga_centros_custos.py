@@ -16,7 +16,7 @@ default_args = {
    
 # Nomeando a DAG e definindo quando será executada
 with DAG(
-   'dag_carga_centros_de_custos',
+   'dag_carga_centros_custos',
    schedule_interval=timedelta(minutes=1),
    catchup=False,
    default_args=default_args
@@ -24,18 +24,25 @@ with DAG(
 
    # Definindo as tarefas a serem executadas
 
-   t1 = BashOperator(
-      task_id='teste',
+   buscaDados = BashOperator(
+      task_id='busca_centros_custos',
       bash_command="""
       cd $AIRFLOW_HOME/dags/etlScripts/centrosDeCustos/
       python3 busca_centros_custos.py
       """)
 
-   t2 = EmailOperator(
+   atualizaDados = BashOperator(
+      task_id='atualiza_centros_custos',
+      bash_command="""
+      cd $AIRFLOW_HOME/dags/etlScripts/centrosDeCustos/
+      python3 atualiza_centros_custos.py
+      """)
+
+   notifica = EmailOperator(
     task_id='send_email',
     to='pucprojeto.sciac@hotmail.com',
     subject='Carga completa',
     html_content="Date: {{ ds }}")
 
    # Definindo o padrão de execução
-   t1 >> t2
+   buscaDados >> atualizaDados >> notifica
