@@ -17,7 +17,7 @@ default_args = {
 # Nomeando a DAG e definindo quando será executada
 with DAG(
    'dag_carga_centros_custos',
-   schedule_interval=timedelta(minutes=1),
+   schedule_interval=timedelta(hours=6),
    catchup=False,
    default_args=default_args
    ) as dag:   
