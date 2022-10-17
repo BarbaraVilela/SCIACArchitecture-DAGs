@@ -9,14 +9,16 @@ with open(file,'r') as temp_file:
 
     # Lendo os dados e armazenando em uma variável json
     json_data = json.load(temp_file)
+
+    # Estabelece a conexão com o banco de dados e obtém os centros de custos ativos nele armazenados
+    log.info('Obtendo os Centros de Custos ativos armazenados na base')
+
+    # Processa os dados
+    log.info('Processando os dados, tratando as atualizações necessárias')
+
+# Grava as atualizações e fecha o arquivo
+    log.info('Gravando as alterações no arquivo temporário')
+
     temp_file.close()
-
-# Estabelece a conexão com o banco de dados e obtém os centros de custos ativos nele armazenados
-log.info('Obtendo os Centros de Custos ativos armazenados na base')
-
-# Atualiza a base de dados interna, com base nos dados obtidos no arquivo
-log.info('Processando os dados, tratando as atualizações necessárias')
-
-log.info('Gravando as alterações na base')
 
 log.info('Centros de Custos atualizados com sucesso!')

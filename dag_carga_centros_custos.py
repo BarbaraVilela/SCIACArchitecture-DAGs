@@ -38,6 +38,13 @@ with DAG(
       python3 atualiza_centros_custos.py
       """)
 
+   carregaDados = BashOperator(
+      task_id='carrega_centros_custos',
+      bash_command="""
+      cd $AIRFLOW_HOME/dags/etlScripts/centrosDeCustos/
+      python3 carrega_centros_custos.py
+      """)
+
    notifica = EmailOperator(
     task_id='send_email',
     to='pucprojeto.sciac@hotmail.com',
@@ -45,4 +52,4 @@ with DAG(
     html_content="Date: {{ ds }}")
 
    # Definindo o padrão de execução
-   buscaDados >> atualizaDados >> notifica
+   buscaDados >> atualizaDados >> carregaDados >> notifica
